@@ -1,0 +1,25 @@
+Config {
+font = "xft:Tamsyn:size=11,Siji:size=11",
+       , bgColor =      "#202020"
+       , fgColor =      "#e0e0e0"
+       , position =     Top
+       , border = BottomB
+       , borderColor =  "#646464"
+       , commands = [
+                Run Weather "KCMI" ["-t"," <tempF>°F","-L","64","-H","77","--normal","#e0e0e0","--high","#ac4142","--low","#6a9fb5"] 36000,
+                Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10,
+                Run Memory ["-t","RAM: <usedratio>%"] 10,
+                Run Date "%a %b %_d, %l:%M %p" "date" 10,
+		Run BatteryP ["BAT0", "BAT1"]
+		    	     ["-t", "<acstatus>",
+			      "-L", "12", "-H", "80", "-p", "3",
+               		      "--", "-O", "<left>% ", "-o", "<left>% (<watts>) ", "-i", "",
+			      "-L", "-15", "-H", "-5",
+               		      "-l", "#ac4142", "-m", "#6a9fb5", "-h", "#b0b0b0"]
+              		      50,
+                Run StdinReader
+                ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %cpu% | %memory% |%battery%|%KCMI% | %date%"
+       }
